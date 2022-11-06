@@ -10,7 +10,7 @@
 
 <body>
   <div id="shopping-list">
-    <h1>{{ header }}</h1>
+    <h1>{{ header || 'Welcome' }}</h1>
     <input v-model="header">
   </div>
 
@@ -19,7 +19,7 @@
     const shoppingList = Vue.createApp({
       data() {
         return {
-          header: 'Vue is ready to party!'
+          header: 'Shopping List App'
         }
       }
     })
