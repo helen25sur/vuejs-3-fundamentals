@@ -11,7 +11,10 @@
 <body>
   <div id="shopping-list">
     <h1>{{ header || 'Welcome' }}</h1>
-
+    <input v-model.lazy="newItem" type="text" placeholder="Add new item">
+    <label>
+      <input type="checkbox" v-model="newItemHighPriority"> High Priority
+    </label>
     <ul>
       <li v-for="{id, name, count} in items" :key="id">
         {{count}} {{name}}
@@ -26,11 +29,15 @@
       data() {
         return {
           header: 'Shopping List App',
+          newItem: '',
+          newItemHighPriority: false,
           items: [
             { id: id++, name: 'Notepad', count: 3 },
             { id: id++, name: 'Color pencils', count: 7 },
             { id: id++, name: 'Oil paints', count: 12 }]
         }
+      },
+      methods: {
       }
     })
       .mount('#shopping-list')
