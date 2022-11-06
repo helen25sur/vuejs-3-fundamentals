@@ -19,9 +19,11 @@
     <div v-if="editing" class="add-item-form">
       <input v-model="count" class="input-nums" type="number">
       <input @keyup.enter="addItem" v-model="newItem" type="text" placeholder="Add new item">
-      <button @click="addItem" class="btn btn-primary">Save Item</button>
+      <button :disabled="newItem.length === 0" @click="addItem" class="btn btn-primary">
+        Save Item</button>
       <label>
-        <input type="checkbox" v-model="newItemHighPriority"> High Priority
+        <input type="checkbox" v-model="newItemHighPriority">
+        High Priority
       </label>
     </div>
     <ul>
