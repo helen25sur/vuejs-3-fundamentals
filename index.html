@@ -11,10 +11,14 @@
 <body>
   <div id="shopping-list">
     <h1>{{ header || 'Welcome' }}</h1>
-    <input v-model.lazy="newItem" type="text" placeholder="Add new item">
-    <label>
-      <input type="checkbox" v-model="newItemHighPriority"> High Priority
-    </label>
+    <div class="add-item-form">
+      <input v-model="count" class="input-nums" type="number">
+      <input @keyup.enter="addItem" v-model="newItem" type="text" placeholder="Add new item">
+      <button @click="addItem" class="btn btn-primary">Save Item</button>
+      <label>
+        <input type="checkbox" v-model="newItemHighPriority"> High Priority
+      </label>
+    </div>
     <ul>
       <li v-for="{id, name, count} in items" :key="id">
         {{count}} {{name}}
@@ -31,6 +35,7 @@
           header: 'Shopping List App',
           newItem: '',
           newItemHighPriority: false,
+          count: '1',
           items: [
             { id: id++, name: 'Notepad', count: 3 },
             { id: id++, name: 'Color pencils', count: 7 },
@@ -38,6 +43,11 @@
         }
       },
       methods: {
+        addItem() {
+          this.items.push({ id: id++, name: this.newItem, count: this.count });
+          this.newItem = '';
+          this.count = 1;
+        }
       }
     })
       .mount('#shopping-list')

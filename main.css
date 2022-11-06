@@ -68,8 +68,8 @@ li input {
   margin: 0 0.5rem 0;
 }
 
-#shopping-list > input,
-#shopping-list > select {
+#shopping-list>input,
+#shopping-list>select {
   width: 100%;
   border-radius: 3px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -87,6 +87,7 @@ li input {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .add-item-form input {
@@ -153,8 +154,13 @@ li input {
 .priority {
   color: #de751f;
 }
-input[type="checkbox"]{
+
+input[type="checkbox"] {
   display: inline !important;
   box-shadow: none;
   width: auto;
+}
+
+.input-nums {
+  max-width: 100px;
 }
