@@ -32,11 +32,12 @@
     </div>
     <p v-if="items.length === 0">Nice job! You bought all!</p>
     <ul>
-      <li v-for="item in items" :key="item.id" @click="togglePurchased(item)"
+      <li v-for="item in filterCompleted" :key="item.id" @click="togglePurchased(item)"
         :class="{strikeout: item.purchased, priority: item.highPriority}">
         {{item.count}} {{item.name}}
       </li>
     </ul>
+    <button @click="hide" v-model="isHide" class="btn btn-secondary">{{textHideBtn}}</button>
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -47,6 +48,8 @@
         return {
           header: 'Shopping List App',
           editing: true,
+          isHide: false,
+          textHideBtn: 'Hide completed',
           newItem: '',
           newItemHighPriority: false,
           count: '1',
@@ -54,6 +57,15 @@
             { id: id++, name: 'Notepad', count: 3, purchased: true, highPriority: false },
             { id: id++, name: 'Color pencils', count: 7, purchased: false, highPriority: true },
             { id: id++, name: 'Oil paints', count: 12, purchased: true, highPriority: false }]
+        }
+      },
+      computed: {
+        filterCompleted() {
+          if (this.isHide) {
+            return this.items.filter(el => !el.purchased);
+          } else {
+            return this.items;
+          }
         }
       },
       methods: {
@@ -76,6 +88,14 @@
         },
         togglePurchased(item) {
           item.purchased = !item.purchased;
+        },
+        hide() {
+          this.isHide = !this.isHide;
+          if (this.isHide) {
+            this.textHideBtn = 'Show All';
+          } else {
+            this.textHideBtn = 'Hide comleted';
+          }
         }
       }
     })
