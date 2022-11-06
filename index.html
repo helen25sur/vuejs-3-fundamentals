@@ -11,15 +11,25 @@
 <body>
   <div id="shopping-list">
     <h1>{{ header || 'Welcome' }}</h1>
-    <input v-model="header">
+
+    <ul>
+      <li v-for="{id, name, count} in items" :key="id">
+        {{count}} {{name}}
+      </li>
+    </ul>
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
+    let id = 0;
     const shoppingList = Vue.createApp({
       data() {
         return {
-          header: 'Shopping List App'
+          header: 'Shopping List App',
+          items: [
+            { id: id++, name: 'Notepad', count: 3 },
+            { id: id++, name: 'Color pencils', count: 7 },
+            { id: id++, name: 'Oil paints', count: 12 }]
         }
       }
     })
