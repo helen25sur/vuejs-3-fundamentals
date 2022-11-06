@@ -10,8 +10,13 @@
 
 <body>
   <div id="shopping-list">
-    <h1>{{ header || 'Welcome' }}</h1>
-    <div class="add-item-form">
+    <div class="header">
+      <h1>{{ header || 'Welcome' }}</h1>
+      <button v-if="editing" @click="doEdit(false)" class="btn btn-cancel">
+        Cancel</button>
+      <button v-else @click="doEdit(true)" class="btn btn-primary">Add Item</button>
+    </div>
+    <div v-if="editing" class="add-item-form">
       <input v-model="count" class="input-nums" type="number">
       <input @keyup.enter="addItem" v-model="newItem" type="text" placeholder="Add new item">
       <button @click="addItem" class="btn btn-primary">Save Item</button>
@@ -33,6 +38,7 @@
       data() {
         return {
           header: 'Shopping List App',
+          editing: false,
           newItem: '',
           newItemHighPriority: false,
           count: '1',
@@ -47,6 +53,10 @@
           this.items.push({ id: id++, name: this.newItem, count: this.count });
           this.newItem = '';
           this.count = 1;
+        },
+        doEdit(editing) {
+          this.editing = editing;
+
         }
       }
     })
